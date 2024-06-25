@@ -1,6 +1,8 @@
 import typing
 
-Duodecimal = typing.Literal["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "X", "E"]
+Duodecimal = (
+    typing.Literal["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "X", "E"] | str
+)
 Mode = typing.Literal["I", "II", "III", "IV", "V", "VI", "VII"]
 
 value_map = {
@@ -80,3 +82,11 @@ def apply_mode(duodecimal: Duodecimal, mode: Mode) -> Duodecimal:
     duodecimal_value = value_map[duodecimal]
     mode_value = mode_map[mode]
     return reverse_value_map[(duodecimal_value + mode_value) % 12]
+
+
+def to_frequency(duodecimal: str) -> float:
+    note = duodecimal[-1]
+    doh = int(duodecimal[:-1])
+    value = 12 * doh + value_map[note]
+    n = value - 57  # 57 is the decimal number of halftones from 00 / C0 to 49 / A4
+    return 440 * 2 ** (n / 12)
