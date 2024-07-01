@@ -2,9 +2,11 @@ import pytest
 
 from duodecimal_notation.convert import (
     from_duodecimal,
+    from_midi,
     to_duodecimal,
     apply_mode,
     to_frequency,
+    to_midi,
 )
 
 convert_test_cases = [
@@ -258,3 +260,29 @@ frequency_test_cases = [
 @pytest.mark.parametrize("duodecimal, frequency", frequency_test_cases)
 def test_to_frequency(duodecimal, frequency):
     assert to_frequency(duodecimal) == pytest.approx(frequency, 0.01)
+
+
+midi_test_cases = [
+    # Cases for midi notes 0 to 11 not defined yet.
+    ("00", 12),  # C0
+    ("01", 13),  # C♯0/D♭0
+    ("02", 14),  # D0
+    ("03", 15),  # D♯0/E♭0
+    ("04", 16),  # E0
+    ("05", 17),  # F0
+    ("06", 18),  # F♯0/G♭0
+    ("07", 19),  # G0
+    ("08", 20),  # G♯0/A♭0
+    ("09", 21),  # A0
+    ("0X", 22),  # A♯0/B♭0
+    ("0E", 23),  # B0
+    ("10", 24),  # C1
+    ("40", 60),  # C4
+    ("97", 127),  # G9
+]
+
+
+@pytest.mark.parametrize("duodecimal, midi", midi_test_cases)
+def test_midi(duodecimal, midi):
+    assert (to_midi(duodecimal)) == midi
+    assert (from_midi(midi)) == duodecimal

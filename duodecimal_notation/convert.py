@@ -84,9 +84,23 @@ def apply_mode(duodecimal: Duodecimal, mode: Mode) -> Duodecimal:
     return reverse_value_map[(duodecimal_value + mode_value) % 12]
 
 
-def to_frequency(duodecimal: str) -> float:
+def to_decimal(duodecimal: str) -> int:
     note = duodecimal[-1]
     doh = int(duodecimal[:-1])
-    value = 12 * doh + value_map[note]
-    n = value - 57  # 57 is the decimal number of halftones from 00 / C0 to 49 / A4
+    return 12 * doh + value_map[note]
+
+
+def to_frequency(duodecimal: str) -> float:
+    decimal = to_decimal(duodecimal)
+    n = decimal - 57  # 57 is the decimal number of halftones from 00 / C0 to 49 / A4
     return 440 * 2 ** (n / 12)
+
+
+def to_midi(duodecimal: str) -> int:
+    return to_decimal(duodecimal) + 12
+
+
+def from_midi(midi: int) -> str:
+    doh = midi // 12 - 1
+    note = reverse_value_map[midi % 12]
+    return f"{doh}{note}"
