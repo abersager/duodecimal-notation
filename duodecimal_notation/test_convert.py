@@ -3,6 +3,7 @@ import pytest
 from duodecimal_notation.convert import (
     from_duodecimal,
     from_midi,
+    to_color,
     to_duodecimal,
     apply_mode,
     to_frequency,
@@ -284,5 +285,40 @@ midi_test_cases = [
 
 @pytest.mark.parametrize("duodecimal, midi", midi_test_cases)
 def test_midi(duodecimal, midi):
-    assert (to_midi(duodecimal)) == midi
-    assert (from_midi(midi)) == duodecimal
+    assert to_midi(duodecimal) == midi
+    assert from_midi(midi) == duodecimal
+
+
+color_test_cases = [
+    ("0", "#FF6666"),
+    ("1", "#FF9966"),
+    ("2", "#FFCC66"),
+    ("3", "#FFFF66"),
+    ("4", "#CCFF66"),
+    ("5", "#99FF66"),
+    ("6", "#66FF66"),
+    ("7", "#66FF99"),
+    ("8", "#66FFCC"),
+    ("9", "#66CCFF"),
+    ("X", "#9999FF"),
+    ("E", "#CC66FF"),
+    ("00", "#FF6666"),
+    ("01", "#FF9966"),
+    ("02", "#FFCC66"),
+    ("03", "#FFFF66"),
+    ("04", "#CCFF66"),
+    ("05", "#99FF66"),
+    ("06", "#66FF66"),
+    ("07", "#66FF99"),
+    ("08", "#66FFCC"),
+    ("09", "#66CCFF"),
+    ("0X", "#9999FF"),
+    ("0E", "#CC66FF"),
+    ("90", "#FF6666"),
+    ("9E", "#CC66FF"),
+]
+
+
+@pytest.mark.parametrize("duodecimal, color", color_test_cases)
+def test_to_color(duodecimal, color):
+    assert to_color(duodecimal) == color

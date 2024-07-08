@@ -66,6 +66,21 @@ reverse_duodecimal_map_sharp = {v: k for k, v in duodecimal_map_sharp.items()}
 reverse_duodecimal_map_flat = {v: k for k, v in duodecimal_map_flat.items()}
 reverse_duodecimal_map = {**reverse_duodecimal_map_sharp, **reverse_duodecimal_map_flat}
 
+color_map = {
+    "0": "#FF6666",
+    "1": "#FF9966",
+    "2": "#FFCC66",
+    "3": "#FFFF66",
+    "4": "#CCFF66",
+    "5": "#99FF66",
+    "6": "#66FF66",
+    "7": "#66FF99",
+    "8": "#66FFCC",
+    "9": "#66CCFF",
+    "X": "#9999FF",
+    "E": "#CC66FF",
+}
+
 
 def from_duodecimal(
     note: Duodecimal, hint: typing.Literal["sharp", "flat", None] = None
@@ -104,3 +119,7 @@ def from_midi(midi: int) -> str:
     doh = midi // 12 - 1
     note = reverse_value_map[midi % 12]
     return f"{doh}{note}"
+
+
+def to_color(duodecimal: str) -> str:
+    return color_map[duodecimal[-1]]
