@@ -7,11 +7,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-
+typer = {extras = ["all"], version = "^0.9.0"}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.2"
 black = "^24.4.2"
+
+[tool.poetry.scripts]
+duo = "duodecimal_notation.cli:main"
 
 [build-system]
 requires = ["poetry-core"]
