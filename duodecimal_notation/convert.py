@@ -1,7 +1,7 @@
 import typing
 
 Duodecimal = (
-    typing.Literal["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "X", "E"] | str
+    typing.Literal["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "X", "Z"] | str
 )
 Mode = typing.Literal["I", "II", "III", "IV", "V", "VI", "VII"]
 
@@ -17,7 +17,7 @@ value_map = {
     "8": 8,
     "9": 9,
     "X": 10,
-    "E": 11,
+    "Z": 11,
 }
 
 reverse_value_map = {v: k for k, v in value_map.items()}
@@ -44,7 +44,7 @@ duodecimal_map_sharp = {
     "8": "G#",
     "9": "A",
     "X": "A#",
-    "E": "B",
+    "Z": "B",
 }
 
 duodecimal_map_flat = {
@@ -59,7 +59,7 @@ duodecimal_map_flat = {
     "8": "Ab",
     "9": "A",
     "X": "Bb",
-    "E": "B",
+    "Z": "B",
 }
 
 reverse_duodecimal_map_sharp = {v: k for k, v in duodecimal_map_sharp.items()}
@@ -78,7 +78,7 @@ color_map = {
     "8": "#66FFCC",
     "9": "#66CCFF",
     "X": "#9999FF",
-    "E": "#CC66FF",
+    "Z": "#CC66FF",
 }
 
 
